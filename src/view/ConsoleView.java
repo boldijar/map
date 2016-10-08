@@ -59,7 +59,20 @@ public class ConsoleView {
             if (option == 8) {
                 deleteClient();
             }
+            if (option == 9) {
+                addRent();
+            }
         }
+    }
+
+    private void addRent() {
+        System.out.println("Id of movie that you want to rent");
+        int movieId = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Id of client that you want to rent");
+        int clientId = scanner.nextInt();
+        scanner.nextLine();
+        controller.addRent(clientId, movieId);
     }
 
     private void deleteClient() {
@@ -124,6 +137,7 @@ public class ConsoleView {
         System.out.println("6) Update clients");
         System.out.println("7) Delete movies");
         System.out.println("8) Delete clients");
+        System.out.println("9) Rent movie");
     }
 
     private int getOption() {
