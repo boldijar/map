@@ -1,19 +1,23 @@
 package repository;
 
 import model.IndexedModel;
-import util.Array;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Paul on 10/8/2016.
  */
-public class BaseRepository<T extends IndexedModel> {
+public class BaseRepository<T extends IndexedModel> implements Crudable<T> {
 
-    private Array<T> mItems = new Array<>();
+    private List<T> mItems = new ArrayList<>();
 
+    @Override
     public void add(T t) {
         mItems.add(t);
     }
 
+    @Override
     public void remove(int id) {
         int indexToRemove = -1;
         for (int i = 0; i < mItems.size(); i++) {
@@ -26,6 +30,7 @@ public class BaseRepository<T extends IndexedModel> {
             mItems.remove(indexToRemove);
     }
 
+    @Override
     public void update(T item) {
         for (int i = 0; i < mItems.size(); i++) {
             if (mItems.get(i).getId() == item.getId()) {
@@ -34,7 +39,8 @@ public class BaseRepository<T extends IndexedModel> {
         }
     }
 
-    public Array<T> listAll() {
+    @Override
+    public List<T> listAll() {
         return mItems;
     }
 

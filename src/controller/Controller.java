@@ -8,6 +8,8 @@ import repository.MovieRepository;
 import repository.RentRepository;
 import util.Array;
 
+import java.util.List;
+
 /**
  * Created by Paul on 10/8/2016.
  */
@@ -54,15 +56,15 @@ public class Controller {
         clientRepository.update(new Client(id, name, address));
     }
 
-    public Array<Movie> getMovies() {
+    public List<Movie> getMovies() {
         return movieRepository.listAll();
     }
 
-    public Array<Client> getClients() {
+    public List<Client> getClients() {
         return clientRepository.listAll();
     }
 
-    public Array<Rent> getRents() {
+    public List<Rent> getRents() {
         return rentRepository.listAll();
     }
 }
