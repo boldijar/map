@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class BaseRepository<T extends IndexedModel> implements Crudable<T> {
 
-    private List<T> mItems = new ArrayList<>();
+    protected List<T> mItems = new ArrayList<>();
 
     @Override
     public void add(T t) {

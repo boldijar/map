@@ -1,6 +1,6 @@
 package view;
 
-import controller.Controller;
+import controller.IController;
 
 import java.util.Scanner;
 
@@ -9,22 +9,12 @@ import java.util.Scanner;
  */
 public class ConsoleView {
 
-    private final Controller controller;
+    private final IController IController;
     private Scanner scanner;
 
-    public ConsoleView(Controller controller) {
-        this.controller = controller;
-        populateRepos();
+    public ConsoleView(IController IController) {
+        this.IController = IController;
         scanner = new Scanner(System.in);
-    }
-
-    private void populateRepos() {
-        controller.addClient("Paul Boldijar", "Brasov");
-        controller.addClient("Paul Al 2-lea", "Cluj");
-        controller.addClient("Corleone", "Bucuresti");
-        controller.addMovie("Directorul", "Drama");
-        controller.addMovie("Jack", "Comedie");
-        controller.addMovie("Directorul", "Drama");
     }
 
     public void start() {
@@ -35,10 +25,10 @@ public class ConsoleView {
                 return;
             }
             if (option == 1) {
-                System.out.println(controller.getMovies());
+                System.out.println(IController.getMovies());
             }
             if (option == 2) {
-                System.out.println(controller.getClients());
+                System.out.println(IController.getClients());
             }
             if (option == 3) {
                 addMovie();
@@ -72,21 +62,21 @@ public class ConsoleView {
         System.out.println("Id of client that you want to rent");
         int clientId = scanner.nextInt();
         scanner.nextLine();
-        controller.addRent(clientId, movieId);
+        IController.addRent(clientId, movieId);
     }
 
     private void deleteClient() {
         System.out.println("Id of client that you want to delete");
         int id = scanner.nextInt();
         scanner.nextLine();
-        controller.deleteClient(id);
+        IController.deleteClient(id);
     }
 
     private void deleteMovie() {
         System.out.println("Id of movie that you want to delete");
         int id = scanner.nextInt();
         scanner.nextLine();
-        controller.deleteMovie(id);
+        IController.deleteMovie(id);
     }
 
     private void updateClient() {
@@ -97,7 +87,7 @@ public class ConsoleView {
         String name = scanner.nextLine();
         System.out.println("Address:");
         String address = scanner.nextLine();
-        controller.updateClient(id, name, address);
+        IController.updateClient(id, name, address);
     }
 
     private void updateMovie() {
@@ -108,7 +98,7 @@ public class ConsoleView {
         String director = scanner.nextLine();
         System.out.println("Type:");
         String type = scanner.nextLine();
-        controller.updateMovie(id, director, type);
+        IController.updateMovie(id, director, type);
     }
 
     private void addMovie() {
@@ -116,7 +106,7 @@ public class ConsoleView {
         String director = scanner.nextLine();
         System.out.println("Type:");
         String type = scanner.nextLine();
-        controller.addMovie(director, type);
+        IController.addMovie(director, type);
     }
 
     private void addClient() {
@@ -124,7 +114,7 @@ public class ConsoleView {
         String name = scanner.nextLine();
         System.out.println("Address:");
         String address = scanner.nextLine();
-        controller.addClient(name, address);
+        IController.addClient(name, address);
     }
 
     private void printMenu() {

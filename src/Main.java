@@ -1,4 +1,5 @@
 import controller.Controller;
+import controller.IController;
 import repository.ClientRepository;
 import repository.MovieRepository;
 import repository.RentRepository;
@@ -13,8 +14,8 @@ public class Main {
         ClientRepository clientRepository = new ClientRepository();
         MovieRepository movieRepository = new MovieRepository();
         RentRepository rentRepository = new RentRepository();
-        Controller controller = new Controller(clientRepository, movieRepository, rentRepository);
-        ConsoleView consoleView = new ConsoleView(controller);
+        IController IController = new Controller(clientRepository, movieRepository, rentRepository);
+        ConsoleView consoleView = new ConsoleView(IController);
         consoleView.start();
     }
 }
