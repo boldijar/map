@@ -1,6 +1,7 @@
 package view;
 
-import controller.IController;
+import controller.IClientController;
+import controller.IMovieController;
 
 import java.util.Scanner;
 
@@ -9,11 +10,13 @@ import java.util.Scanner;
  */
 public class ConsoleView {
 
-    private final IController IController;
+    private final IClientController iClientController;
+    private final IMovieController iMovieController;
     private Scanner scanner;
 
-    public ConsoleView(IController IController) {
-        this.IController = IController;
+    public ConsoleView(IClientController iClientController, IMovieController iMovieController) {
+        this.iClientController = iClientController;
+        this.iMovieController = iMovieController;
         scanner = new Scanner(System.in);
     }
 
@@ -25,10 +28,10 @@ public class ConsoleView {
                 return;
             }
             if (option == 1) {
-                System.out.println(IController.getMovies());
+                System.out.println(iMovieController.getMovies());
             }
             if (option == 2) {
-                System.out.println(IController.getClients());
+                System.out.println(iClientController.getClients());
             }
             if (option == 3) {
                 addMovie();
@@ -52,7 +55,44 @@ public class ConsoleView {
             if (option == 9) {
                 addRent();
             }
+            if (option == 10) {
+                filterClientsByName();
+            }
+            if (option == 11) {
+                filterClientsByAddress();
+            }
+            if (option == 12) {
+                filterMoviesByDirector();
+            }
+            if (option == 13) {
+                filterMoviesByType();
+            }
         }
+    }
+
+    private void filterMoviesByDirector() {
+        System.out.println("Director to filter: ");
+        String director = scanner.nextLine();
+        System.out.println(iMovieController.getMoviesByDirector(director));
+    }
+
+    private void filterMoviesByType() {
+        System.out.println("Type to filter: ");
+        String type = scanner.nextLine();
+        System.out.println(iMovieController.getMoviesByType(type));
+
+    }
+
+    private void filterClientsByAddress() {
+        System.out.println("Address to filter: ");
+        String address = scanner.nextLine();
+        System.out.println(iClientController.getClientsByAddress(address));
+    }
+
+    private void filterClientsByName() {
+        System.out.println("Name to filter: ");
+        String name = scanner.nextLine();
+        System.out.println(iClientController.getClientsByName(name));
     }
 
     private void addRent() {
@@ -62,21 +102,21 @@ public class ConsoleView {
         System.out.println("Id of client that you want to rent");
         int clientId = scanner.nextInt();
         scanner.nextLine();
-        IController.addRent(clientId, movieId);
+//        IController.addRent(clientId, movieId);
     }
 
     private void deleteClient() {
         System.out.println("Id of client that you want to delete");
         int id = scanner.nextInt();
         scanner.nextLine();
-        IController.deleteClient(id);
+        iClientController.deleteClient(id);
     }
 
     private void deleteMovie() {
         System.out.println("Id of movie that you want to delete");
         int id = scanner.nextInt();
         scanner.nextLine();
-        IController.deleteMovie(id);
+        iMovieController.deleteMovie(id);
     }
 
     private void updateClient() {
@@ -87,7 +127,7 @@ public class ConsoleView {
         String name = scanner.nextLine();
         System.out.println("Address:");
         String address = scanner.nextLine();
-        IController.updateClient(id, name, address);
+        iClientController.updateClient(id, name, address);
     }
 
     private void updateMovie() {
@@ -98,7 +138,7 @@ public class ConsoleView {
         String director = scanner.nextLine();
         System.out.println("Type:");
         String type = scanner.nextLine();
-        IController.updateMovie(id, director, type);
+        iMovieController.updateMovie(id, director, type);
     }
 
     private void addMovie() {
@@ -106,7 +146,7 @@ public class ConsoleView {
         String director = scanner.nextLine();
         System.out.println("Type:");
         String type = scanner.nextLine();
-        IController.addMovie(director, type);
+        iMovieController.addMovie(director, type);
     }
 
     private void addClient() {
@@ -114,7 +154,7 @@ public class ConsoleView {
         String name = scanner.nextLine();
         System.out.println("Address:");
         String address = scanner.nextLine();
-        IController.addClient(name, address);
+        iClientController.addClient(name, address);
     }
 
     private void printMenu() {
@@ -128,6 +168,10 @@ public class ConsoleView {
         System.out.println("7) Delete movies");
         System.out.println("8) Delete clients");
         System.out.println("9) Rent movie");
+        System.out.println("10) Filter clients by name");
+        System.out.println("11) Filter clients by address");
+        System.out.println("12) Filter movies by director");
+        System.out.println("13) Filter movies by type");
     }
 
     private int getOption() {

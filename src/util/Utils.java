@@ -13,9 +13,7 @@ public class Utils {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(object);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -25,7 +23,6 @@ public class Utils {
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             return (T) objectInputStream.readObject();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return null;
     }

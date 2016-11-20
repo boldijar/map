@@ -41,7 +41,7 @@ public class BaseRepository<T extends IndexedModel> implements Crudable<T> {
 
     @Override
     public List<T> listAll() {
-        return mItems;
+        return new ArrayList<>(mItems);
     }
 
 

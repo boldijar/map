@@ -1,5 +1,7 @@
-import controller.Controller;
-import controller.IController;
+import controller.ClientController;
+import controller.IClientController;
+import controller.IMovieController;
+import controller.MovieController;
 import repository.ClientRepository;
 import repository.MovieRepository;
 import repository.RentRepository;
@@ -14,8 +16,9 @@ public class Main {
         ClientRepository clientRepository = new ClientRepository();
         MovieRepository movieRepository = new MovieRepository();
         RentRepository rentRepository = new RentRepository();
-        IController IController = new Controller(clientRepository, movieRepository, rentRepository);
-        ConsoleView consoleView = new ConsoleView(IController);
+        IClientController clientController = new ClientController(clientRepository);
+        IMovieController movieController = new MovieController(movieRepository);
+        ConsoleView consoleView = new ConsoleView(clientController, movieController);
         consoleView.start();
     }
 }
